@@ -616,6 +616,15 @@ func main() {
 			wg.Add(1)
 			go workerPush(wg, chPush, push, statCH)
 
+			// 30s 打印一次统计数据
+			go func() {
+				ticker := time.NewTicker(30 * time.Second)
+				for range ticker.C {
+					log.Println("ch size:", len(ch), " get next chan size:", len(chParse), " parse next chan size:", len(chGetGas), "gase used next ch size:", len(chSave), " save next ch size:", len(chPush), " push next chan size:", len(statCH), " max ch:", qsize)
+
+				}
+			}()
+
 			var moniterMin = make(chan *Transaction, qsize)
 			var moniter5Min = make(chan *Transaction, qsize)
 			var moniter10Min = make(chan *Transaction, qsize)
