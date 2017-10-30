@@ -391,7 +391,7 @@ func moniter(addr string, from *big.Int, ch chan<- int64, dur time.Duration) {
 func getMaxBlockNumber(db *sql.DB, tblname string) (*big.Int, error) {
 
 	tblname = pq.QuoteIdentifier(tblname)
-	rows, err := db.Query(fmt.Sprintf(`SELECT  count(*) from (SELECT * from ethtx LIMIT 1) as tmp;`, tblname))
+	rows, err := db.Query(fmt.Sprintf(`SELECT  count(*) from (SELECT * from %s LIMIT 1) as tmp;`, tblname))
 	if err != nil {
 		return nil, err
 	}
