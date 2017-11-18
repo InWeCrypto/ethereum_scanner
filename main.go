@@ -549,7 +549,7 @@ func main() {
 			workers := c.Int("worker-size")
 			moniterperiod := c.Duration("moniter-period")
 			tblname := c.String("tablename")
-			stat_tablename := c.String("stat_tablename")
+// 			stat_tablename := c.String("stat_tablename")
 			log.Println("driver:", drivername)
 			log.Println("dbname:", dbname)
 			log.Println("dbpassword:", dbpassword)
