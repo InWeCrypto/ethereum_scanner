@@ -625,33 +625,33 @@ func main() {
 				}
 			}()
 
-			var moniterMin = make(chan *Transaction, qsize)
-			var moniter5Min = make(chan *Transaction, qsize)
-			var moniter10Min = make(chan *Transaction, qsize)
-			var moniter30Min = make(chan *Transaction, qsize)
+			//var moniterMin = make(chan *Transaction, qsize)
+			//var moniter5Min = make(chan *Transaction, qsize)
+			//var moniter10Min = make(chan *Transaction, qsize)
+			//var moniter30Min = make(chan *Transaction, qsize)
 			//  通知statmonitor
-			go func(outs ...chan<- *Transaction) {
-				for v := range statCH {
-					for _, ch := range outs {
-						ch <- v
-					}
-				}
-			}(moniterMin, moniter5Min, moniter10Min, moniter30Min)
+			//go func(outs ...chan<- *Transaction) {
+			//	for v := range statCH {
+			//		for _, ch := range outs {
+			//			ch <- v
+			//		}
+			//	}
+			//}(moniterMin, moniter5Min, moniter10Min, moniter30Min)
 
-			quit := make(chan bool)
-			defer close(quit)
+			//quit := make(chan bool)
+			//defer close(quit)
 			// 1分钟
-			go statMoniter(db, 60, tblname, stat_tablename+"_1min", quit, moniterMin)
+			//go statMoniter(db, 60, tblname, stat_tablename+"_1min", quit, moniterMin)
 
 			// 5分钟
-			go statMoniter(db, 60*5, tblname, stat_tablename+"_5min", quit, moniter5Min)
+			//go statMoniter(db, 60*5, tblname, stat_tablename+"_5min", quit, moniter5Min)
 
 			// 10分钟
-			go statMoniter(db, 60*10, tblname, stat_tablename+"_10min", quit, moniter10Min)
+			//go statMoniter(db, 60*10, tblname, stat_tablename+"_10min", quit, moniter10Min)
 
 			// 30分钟
-			go statMoniter(db, 60*30, tblname, stat_tablename+"_30min", quit, moniter30Min)
-			moniter(ethaddr, from, ch, moniterperiod)
+			//go statMoniter(db, 60*30, tblname, stat_tablename+"_30min", quit, moniter30Min)
+			//moniter(ethaddr, from, ch, moniterperiod)
 			wg.Wait()
 			log.Printf("shutdown success ...")
 			return nil
