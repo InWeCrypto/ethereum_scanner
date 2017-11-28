@@ -651,7 +651,7 @@ func main() {
 
 			// 30分钟
 			//go statMoniter(db, 60*30, tblname, stat_tablename+"_30min", quit, moniter30Min)
-			//moniter(ethaddr, from, ch, moniterperiod)
+			moniter(ethaddr, from, ch, moniterperiod)
 			wg.Wait()
 			log.Printf("shutdown success ...")
 			return nil
