@@ -363,21 +363,20 @@ func moniter(addr string, from *big.Int, ch chan<- int64, dur time.Duration) {
 			return
 		case <-tick.C:
 			to, err = getBlockNumber(addr)
-			log.Println(fmt.Sprintf("get last block %d %s",to,addr))
+			// log.Println(fmt.Sprintf("get last block %d %s",to,addr))
 			if err != nil {
 				log.Println(err)
 				continue
 			}
 		default:
 			diff := to.Int64() - from.Int64() + 1
-			
-			log.Println(fmt.Sprintf("block diff %d",diff))
-			
+
+			// log.Println(fmt.Sprintf("block diff %d", diff))
+
 			// 相差1个块
 			if diff <= 0 {
 				goto SLEEP
 			}
-		
 
 			for x := int64(1); x <= diff; x++ {
 				select {
@@ -554,7 +553,7 @@ func main() {
 			workers := c.Int("worker-size")
 			moniterperiod := c.Duration("moniter-period")
 			tblname := c.String("tablename")
-// 			stat_tablename := c.String("stat_tablename")
+			// 			stat_tablename := c.String("stat_tablename")
 			log.Println("driver:", drivername)
 			log.Println("dbname:", dbname)
 			log.Println("dbpassword:", dbpassword)
