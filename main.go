@@ -369,7 +369,7 @@ func moniter(addr string, from *big.Int, ch chan<- int64, dur time.Duration) {
 				continue
 			}
 		default:
-			diff := to.Int64() - from.Int64() - 1
+			diff := to.Int64() - from.Int64() 
 			
 			log.Println(fmt.Sprintf("block diff %d",diff))
 			
