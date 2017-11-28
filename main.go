@@ -363,16 +363,21 @@ func moniter(addr string, from *big.Int, ch chan<- int64, dur time.Duration) {
 			return
 		case <-tick.C:
 			to, err = getBlockNumber(addr)
+			log.Println(fmt.Sprintf("get last block %d",to))
 			if err != nil {
 				log.Println(err)
 				continue
 			}
 		default:
 			diff := to.Int64() - from.Int64() - 1
+			
+			log.Println(fmt.Sprintf("block diff %d",diff))
+			
 			// 相差1个块
 			if diff <= 0 {
 				goto SLEEP
 			}
+		
 
 			for x := int64(1); x <= diff; x++ {
 				select {
